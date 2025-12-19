@@ -39,15 +39,17 @@ simple-time-service/
     ├── terraform.tfvars.example
     └── .gitignore
 ```
-🔧 Prerequisites
+🔧 Prerequisites:
 
 The following tools are required to deploy this project.
 1️⃣ Operating System
 Amazon Linux 2023 
+
 2️⃣ Install Git : https://git-scm.com/
 ```
 sudo yum install git -y
 ```
+
 3️⃣ Install Docker : https://docs.docker.com/get-started/get-docker/
 ```
 sudo yum install docker -y
@@ -60,6 +62,7 @@ verify if docker is installed correctly:
 ```
 docker version
 ```
+
 4️⃣ Install AWS CLI v2 (Amazon linux 2023 comes preinstalled with aws cli, so skipping this step)
 you can verify aws cli by -
 ```
@@ -80,17 +83,17 @@ terraform version
 ```
 
 🔐 AWS Credentials Configuration
-Configure an IAM role with below permissions so that EC2 can launch and create resources on your behalf ( this is better option as compared to AWS configure option as anyone who has access to this machine can get your 
-crednetials and misuse it, so its better to use IAM role attach it to instance from "modify IAM role" option available in ec2 console
+Configure an IAM role with below permissions so that EC2 can launch and create resources on your behalf (this is better option as compared to AWS configure option as anyone who has access to this machine can get your crednetials and misuse it, so its better to use IAM role attach it to instance from "modify IAM role" option available in ec2 console)
 
 Attach below permission to IAM role-
-
+```
 AmazonEC2ContainerRegistryFullAccess
 AmazonEC2FullAccess
 AmazonECS_FullAccess
 AmazonVPCFullAccess
 ElasticLoadBalancingFullAccess
 IAMFullAccess
+```
 
 🐳 Build Docker Image and Run Locally
 ```
@@ -112,7 +115,7 @@ you should get below output -
 ```
 <img width="1919" height="249" alt="image" src="https://github.com/user-attachments/assets/afd0d273-ce3e-465f-8b4b-dee87dabe39d" />
 
-📦 Push Image to Amazon ECR
+📦 Push Image to Amazon ECR:
 Create ECR Repository
 ```
 aws ecr create-repository \
@@ -132,6 +135,7 @@ docker push <ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/simple-time-service:lat
 ```
 
 🏗️ Deploy Infrastructure with Terraform
+
 1️⃣ Configure Terraform Variables
 Edit terraform.tfvars with image URI just created in previous step
 ```
@@ -157,7 +161,6 @@ terraform output
 ```
 Open the URL in a browser:
 http://alb-dns-name
-
 
 ----------------------------------------------------------------------------------------------------
 🧠 Design Considerations-->
